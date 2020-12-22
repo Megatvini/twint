@@ -1,8 +1,8 @@
+import logging as logme
 import re
 import time
 
 import requests
-import logging as logme
 
 
 class TokenExpiryException(Exception):
@@ -18,7 +18,10 @@ class RefreshTokenException(Exception):
 class Token:
     def __init__(self, config):
         self._session = requests.Session()
-        self._session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0'})
+        self._session.headers.update(
+            {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0'})
+        proxy = f'{config.Proxy_type}://{config.Proxy_host}:{config.Proxy_port}'
+        self._session.proxies.update({'https': proxy, 'http': proxy})
         self.config = config
         self._retries = 5
         self._timeout = 10
@@ -30,7 +33,7 @@ class Token:
             req = self._session.prepare_request(requests.Request('GET', self.url))
             logme.debug(f'Retrieving {req.url}')
             try:
-                r = self._session.send(req, allow_redirects=True, timeout=self._timeout)
+                r = self._session.send(req, allow_redirects=True, timeout=self._timeout, verify=False)
             except requests.exceptions.RequestException as exc:
                 if attempt < self._retries:
                     retrying = ', retrying'
