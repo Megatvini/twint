@@ -163,4 +163,6 @@ def Tweet(tw, config):
         except ValueError as e:
             logme.debug(__name__ + ':Tweet:translator.translate:' + str(e))
             raise Exception("Invalid destination language: {} / Tweet: {}".format(config.TranslateDest, t.tweet))
+
+    t.disputed = tw['disputed'] if tw['disputed'] is not None else ''
     return t

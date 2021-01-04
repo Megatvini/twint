@@ -117,6 +117,12 @@ def parse_tweets(config, response):
                     'retweet_id': rt_id,
                     'retweet_date': _dt,
                 }
+
+            try:
+                text_ = timeline_entry['content']['item']['content']['tweet']['forwardPivot']['text']['text']
+                temp_obj['disputed'] = text_
+            except:
+                temp_obj['disputed'] = None
             feed.append(temp_obj)
     next_cursor = _get_cursor(response)
     return feed, next_cursor

@@ -76,7 +76,8 @@ def tweetFieldnames():
             "retweet_date",
             "translate",
             "trans_src",
-            "trans_dest"
+            "trans_dest",
+            "disputed"
             ]
     return fieldnames
 
