@@ -20,7 +20,7 @@ class Token:
         self._session = requests.Session()
         self._session.headers.update(
             {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0'})
-        proxy = f'{config.Proxy_type}://{config.Proxy_host}:{config.Proxy_port}'
+        proxy = f'socks5://localhost:9050'
         self._session.proxies.update({'https': proxy, 'http': proxy})
         self.config = config
         self._retries = 5
