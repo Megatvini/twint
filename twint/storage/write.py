@@ -60,6 +60,7 @@ def Csv(obj, config):
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames, dialect=dialect)
             writer.writeheader()
 
+    row['disputed'] = obj.disputed
     with open(base, "a", newline='', encoding="utf-8") as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames, dialect=dialect)
         writer.writerow(row)

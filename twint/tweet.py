@@ -164,5 +164,8 @@ def Tweet(tw, config):
             logme.debug(__name__ + ':Tweet:translator.translate:' + str(e))
             raise Exception("Invalid destination language: {} / Tweet: {}".format(config.TranslateDest, t.tweet))
 
-    t.disputed = tw['disputed'] if tw['disputed'] is not None else ''
+    if tw['disputed'] is not None:
+        t.disputed = tw['disputed']
+    else:
+        t.disputed = ''
     return t
