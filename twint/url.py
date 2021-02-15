@@ -28,7 +28,7 @@ async def Favorites(username, init):
     logme.debug(__name__ + ':Favorites')
     url = f"{mobile}/{username}/favorites?lang=en"
 
-    if init != '-1':
+    if str(init) != '-1':
         url += f"&max_id={init}"
 
     return url
